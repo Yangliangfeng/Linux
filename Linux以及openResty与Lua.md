@@ -23,3 +23,52 @@ print(type(x) == nil) ----返回false
 
 print(type(x) == 'nil') ----返回true
 ```
+* boolean布尔类型
+```
+1. Lua 中 nil 和 false 为“假”，其它所有值均为“真”。比如 0 和空字符串就是“真”
+
+```
+* number数字类型
+```
+local count = 10
+local order = 3.99
+local score = 98.01
+print(math.floor(order))   -->output:3
+print(math.ceil(score))    -->output:99
+```
+* 字符串
+```
+1. 表示字符串
+
+用单引号或者双引号，或者使用长括号（[[]]）来定义，整个词法分析过程将不受分行限制，不处理任何转义符
+
+2. 转义字符
+
+string =  hello\',\"\",\\n，\\t
+
+3. 字符串连接使用的是 ..
+
+print("a" .. 'b') ----输出ab
+
+4. 字符串与number类型转换
+
+print(tonumber("10") == 10)
+print(tostring(10) == "10")
+
+5. 使用 # 来计算字符串的长度，放在字符串前面
+
+print(#"this is string")
+
+6. string不可修改（重点理解）
+
+  1）在 Lua 实现中，Lua 字符串一般都会经历一个“内化”（intern）的过程，即两个完全一样的 Lua 字符串在 
+  
+  Lua 虚拟机中只会存储一份。每一个 Lua 字符串在创建时都会插入到 Lua 虚拟机内部的一个全局的哈希表中。
+  
+  2）Lua 的字符串是不可改变的值，不能像在c语言中那样直接修改字符串的某个字符，而是根据修改要求来创建一个
+  
+  新的字符串。Lua 也不能通过下标来访问字符串的某个字符。
+  
+  Lua的字符串和其它对象都是自动内存管理机制所管理的对象，不需要担心字符串的内存分配和释放提供了效率，安全
+
+```
