@@ -214,6 +214,16 @@ nginx命令行：
 
 5. --with_http_geoip_module       //根据IP地址创建新变量
 ```
+* max_clients 参数的配置
+```
+1. nginx作为http服务器
+
+max_clients =worker_process * worker_connections/2
+
+2. nginx作为反向代理服务器
+
+max_clients = worker_process * worker_connections/4
+```
 
 
 
