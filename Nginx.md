@@ -224,6 +224,14 @@ max_clients =worker_process * worker_connections/2
 
 max_clients = worker_process * worker_connections/4
 ```
+* 以天为单位进行Nginx日志切换脚本
+```
+#!/bin/bash
+LOGS_PATH=/usr/local/nginx/logs
+YESTERDAY=$(date -d "yesterday" +%Y-%m-%d)
+mv ${LOGS_PATH}/access.log ${LOGS_PATH}/access_${YESTERDAY}.log
+kill -USR1 $(cat /usr/local/nginx/logs/nginx.pid)   # 向 Nginx 主进程发送 USR1 信号。USR1 信号是重新打开日志文件
+```
 
 
 
