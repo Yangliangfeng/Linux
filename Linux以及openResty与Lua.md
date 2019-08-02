@@ -1,42 +1,25 @@
-###  基于Linux的openResty与Lua脚本
+##  基于Linux的openResty与Lua脚本
 
-* openResty的基本使用
+### Lua脚本语言
+
+* 全局变量与局部变量
 ```
-1. github的下载地址
+1. 全局变量
+b=0;
+print(b);
 
-https://github.com/openresty/openresty/releases
+print(c);---------打印未初始化的全局变量输出：nil
 
-2. 安装
+b = nil --------删除全局变量
 
-1）编译
-./configure --with-luajit --with-pcre --with-http_gzip_static_module --with-http_realip_module 
---with-http_geoip_module --with-http_ssl_module  --with-http_stub_status_module
+2. 局部变量
+local a = 1;-----定义
+```
+* 判断变量类型--type
+```
+type(x) ----返回变量类型，返回的是string字符串
 
---with-http_gzip_static_module #静态文件压缩
+print(type(x) == nil) ----返回false
 
---with-http_stub_status_module #监控nginx状态
-
---with-http_realip_module #通过这个模块允许我们改变客户端请求头中客户端IP地
-
-址值(例如X-Real-IP 或 X-Forwarded-For)，意义在于能够使得后台服务器记录原始客户端的IP地址
-
---with-pcre #设置PCRE库（pcre pcre-devel）
-
---with-http_ssl_module #使用https协议模块。（openssl openssl-devel）
-
---with-http_geoip_module #增加了根据ip获得城市信息，经纬度等模块 （GeoIP-devel）
-
-2）安装
-make && make install
-
-3）设置环境变量
-
-# vi /etc/profile
-
-export NGINX_HOME=/usr/local/openresty/nginx
-
-export PATH=$PATH:$NGINX_HOME/sbin
-
-# source /etc/profile ##生效
-
+print(type(x) == 'nil') ----返回true
 ```
