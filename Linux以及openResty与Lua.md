@@ -74,3 +74,35 @@ print(#"this is string")
   Lua的字符串和其它对象都是自动内存管理机制所管理的对象，不需要担心字符串的内存分配和释放提供了效率，安全
 
 ```
+* table类型
+```
+1. ua中没有数组和map，都是用table这个类型
+
+2. 初始化表
+
+mytable = {}
+
+3. 指定值
+
+mytable[2]= "Lua2"
+
+mytalbe["k1"] = v1
+
+4. 移除引用
+
+mytable = nil ----lua垃圾回收会释放内存
+
+5. lua类似数组的table ，索引值从1开始,而不是0
+
+6. table 是内存地址,赋值给变量;table进行赋值给变量，其实是把内存地址给了变量，变量只是引用了内存地址
+
+local mytable1 = {"a",key1 = "v1","b",k2="v2",k3="v3","hello","world"}
+
+local mytable2 =  mytable1
+
+mytable2[1] = "aa"
+
+print(mytable2[1])
+
+print(mytable1[1])
+```
