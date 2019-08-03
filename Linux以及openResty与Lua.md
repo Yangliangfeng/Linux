@@ -52,6 +52,8 @@ string =  hello\',\"\",\\n，\\t
 
 print("a" .. 'b') ----输出ab
 
+注意：很多字符串连接时，采用..性能很低，推荐使用table.concat()
+
 4. 字符串与number类型转换
 
 print(tonumber("10") == 10)
