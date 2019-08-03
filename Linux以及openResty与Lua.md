@@ -108,3 +108,24 @@ print(mytable2[1])
 
 print(mytable1[1])
 ```
+* for循环结构
+```
+1. for 语句有两种形式：数字 for 和范型 for。
+
+for begin（开始的数）, finish（结束的数）, step（步长） do 
+    ....
+end
+
+for i = 1, 5 do 
+    print(i)
+end
+
+2. 如果不想给循环设置上限的话，可以使用常量 math.huge
+
+for i = 1, math.huge do
+    if (0.3*i^3 - 20*i^2 -500) > 0 do
+        print(i)
+        break
+    end
+end
+```
