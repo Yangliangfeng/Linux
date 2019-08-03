@@ -128,4 +128,26 @@ for i = 1, math.huge do
         break
     end
 end
+
+3. for 泛型
+
+对lua的table类型进行遍历;泛型 for 循环通过一个迭代器（iterator）函数来遍历所有值
+
+local a = {"a", "b", "c", "d"}
+for i, v in ipairs(a) do
+  print("index:", i, " value:", v)
+end
+
+Lua 的基础库提供了 ipairs，这是一个用于遍历数组的迭代器函数。在每次循环中，i 会被赋予一个索引值，
+
+同时v被赋予一个对应于该索引的数组元素值。
+
+遍历一个 table 中所有的 key
+
+for k in pairs(t) do
+    print(k)
+end
+
+pairs是可以把数组类型和哈希类型索引值，都会迭代出来
+
 ```
