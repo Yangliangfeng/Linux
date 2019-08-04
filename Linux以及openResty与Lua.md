@@ -59,9 +59,11 @@ print("a" .. 'b') ----输出ab
 print(tonumber("10") == 10)
 print(tostring(10) == "10")
 
-5. 使用 # 来计算字符串的长度，放在字符串前面
+5. 计算字符串的长度
+    1）使用 # 来计算字符串的长度，放在字符串前面
+        print(#"this is string")
+    2） string.len(s) ----此函数是不推荐的，推荐使用 # 运算符来获取 Lua 字符串的长度
 
-print(#"this is string")
 
 6. string不可修改（重点理解）
 
@@ -76,6 +78,7 @@ print(#"this is string")
   Lua的字符串和其它对象都是自动内存管理机制所管理的对象，不需要担心字符串的内存分配和释放提供了效率，安全
 
 ```
+* 字符串的函数
 * table类型
 ```
 1. ua中没有数组和map，都是用table这个类型
