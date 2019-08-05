@@ -214,3 +214,93 @@ pairs是可以把数组类型和哈希类型索引值，都会迭代出来
 9. %x  16进制数[0-9a-fA-F]
 10.%z  ascii码是0的字符
 ```
+* Lua面向对象编程示例（涉及到Lua中的table，元表，模块，面向对象编程的类概念，继承）
+```
+--基类 shape
+
+local shape = { name = ""}
+
+function shape:new(name) --相当于初始化
+    local o = {
+        name = name or "shape"
+    }
+    setmetatable(o, {__index = self}) --设置元表，用于子类继承
+    return o
+end
+
+function shape:getPerimeter() --shape的getPerimeter方法
+    print("getPerimeter in shape");
+    return 0
+end
+
+function shape:getArea() --shape的getArea方法
+    print("getArea in shape");
+    return 0
+end
+
+function shape:getVum ()
+    print("getVum in shape");
+    return 0
+end
+
+return shape   --返回模块
+
+
+-----triangle继承类
+
+local shape = require("shape")
+local triangle = {}
+
+
+function triangle:new (name,a1,a2,a3) --初始化
+  local obj = shape:new(name); --实例化shape对象
+  
+  local super_mt = getmetatable(obj); --获取实例化shape对象中的元表即obj实例化对象的父类
+  
+  setmetatable(self, super_mt); --继承shape类
+  
+  
+  obj.super = setmetatable({}, super_mt) --把父类的元表赋值super对象
+  
+  --3）属性赋值
+  obj.a1 = a1 or 0;
+  obj.a2 = a2 or 0;
+  obj.a3 = a3 or 0;
+  
+  setmetatable(obj, { __index = self })
+  
+  return obj;
+end
+
+
+function triangle:getPerimeter() -- 方法的重写getPerimeter
+  print("getPerimeter in triangle");
+  return (self.a1 + self.a2 + self.a3);
+end
+
+
+function triangle:getHalfPerimeter() -- 方法的重写 getHalfPerimeter
+  print("getHalfPerimeter in triangle");
+  return (self.a1 + self.a2 + self.a3) / 2
+end
+
+return triangle
+
+--------test测试脚本
+local triangle = require("triangle")
+
+local triangle1 = triangle:new("t1",1,2,3)
+local triangle2 = triangle:new("t2",6,7,8)
+
+print("t1 getPerimeter:",triangle1:getPerimeter())
+print("t1 getHalfPerimeter:",triangle1:getHalfPerimeter())
+
+print("t2 getPerimeter:",triangle2:getPerimeter())
+print("t2 getHalfPerimeter:",triangle2:getHalfPerimeter())
+
+---- 从shape继承的getVum方法
+print("t1 getVum:",triangle1:getVum())
+print("t2 getVum:",triangle2:getVum())
+print("===============");
+print("t2 super getPerimeter:",triangle2.super:getPerimeter())
+```
