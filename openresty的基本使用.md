@@ -8,6 +8,7 @@
    将 lua-resty-http/lib/resty/ 目录下的 http.lua 和 http_headers.lua 两个文件拷贝到
    
    /usr/local/openresty/lualib/resty 目录下
+   
 3. 配置https协议
   server虚拟主机模块设置：
   lua_ssl_verify_depth 2;
