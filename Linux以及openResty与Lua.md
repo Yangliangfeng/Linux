@@ -1,8 +1,8 @@
-##  基于Linux的openResty与Lua脚本
+
 
 ### phpstorm 使用Emmylua插件编写Lua脚本
 
-### Lua脚本语言
+##  Lua脚本语法
 
 * 全局变量与局部变量
 ```
