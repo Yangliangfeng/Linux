@@ -17,6 +17,62 @@
 4. 更多openresty模块：https://github.com/bungle/awesome-resty
 
 ```
+* OpenResty发起http请求
+
+```
+1. 场景：
+   用户浏览器请求url访问到nginx服务器，但此请求业务需要再次请求其他业务；
+   如用户请求订单服务获取订单详情，可订单详情中需要返回商品信息，也就需要再请求商品服务获取商品信息；
+   这样就需要nginx需要有发起http请求的能力，而不是让用户浏览器在请求商品访问
+   
+   nginx服务发起http请求区分内部请求 和 外部请求
+   
+2. 内部请求
+   1）capture请求方法
+   语法： ngx.location.capture(uri,{options？});
+   options可以传参数和设置请求方式
+   
+   案例：  
+      local res = ngx.location.capture("/product",{
+         method = ngx.HTTP_GET,   #请求方式
+         args = {a=1,b=2},  #get方式传参数
+         body = "c=3&d=4" #post方式传参数
+      });
+    
+   ngx.location.capture 方法就是发起http的请求，但是它只能请求 内部服务，不能直接请求外部服务
+   
+   这边有一种情况，这样的定义，用户用浏览器直接请求商品服务也照样请求
+
+   可很多时候我们会要求商品请求 是不对外暴露的，也就是用户无法直接访问商品服务请求。
+   那我们只要在内部请求那边加上一个关键字，internal 就可以了
+   location /product {  #商品服务请求
+       internal;
+      echo "商品请求";
+   }
+   这样直接访问就报404错误了
+   
+2. capture_multi 并发请求
+
+   语法：res1,res2, ... = ngx.location.capture_multi({ 
+								{uri, options?}, 
+								{uri, options?}, 
+								...
+						})
+3. 外部请求
+   location /product {
+      internal;
+      proxy_pass "https://s.taobao.com/search?q=iphone";
+   }
+   location /order {
+      content_by_lua_block {
+      local res = ngx.location.capture("/product");
+      ngx.say(res.status)
+      ngx.say(res.body)
+        }
+   }
+   在商品服务那边用的proxy_pass 请求外部http请求，这样就达到了请求外部http的目的。
+   
+```
 * OpenResty执行流程
 
 ![](https://github.com/Yangliangfeng/Linux/raw/master/file/images/openresty.png)
