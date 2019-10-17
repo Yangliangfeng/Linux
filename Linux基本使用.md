@@ -89,3 +89,42 @@ notice: hard 必须大于等于soft的值
     so_keepalive = 30::10
     keepidle  keepintvl   keepcnt
 ```
+### Linux 之Centos8 的 Nmcli配置网络
+```
+1. nmcli 命令服务
+systemctl status NetworkManager
+
+2. 查看网卡信息
+   nmcli
+
+3. 查看网络设备状态
+ nmcli device status
+ 
+4. 查看网络详细信息（ip + dns + gateway)
+  nmcli device show ens32
+  
+5. 设置静态ip地址
+   nmcli connection modify ens32 ipv4.address '192.168.1.35'
+   
+6. 设置DNS
+   nmcli connection modify ens32 ipv4.dns '114.114.114.114'
+   
+7. 设置网关
+   nmcli connection modify ens32 ipv4.gateway '192.168.1.1'
+   
+8. 设置IP地址为手动指定
+   nmcli connection modify ens32 ipv4.method manual
+   
+ 9. 设置IP地址为dhcp自动获取
+   nmcli connection modify ens32 ipv4.method auto
+   
+ 10. 设置开机自动连接
+   nmcli connection modify ens32 connection.autoconnect yes
+   nmcli connection modify ens32 connection.autoconnect no
+   
+ 11. nmcli重新加载ifcfg-ens32配置文件
+   nmcli connection reload
+   
+ 12. 不重启系统让网卡生效的方法：
+   nmcli connection up ens32
+```
