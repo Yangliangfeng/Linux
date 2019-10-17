@@ -128,3 +128,17 @@ systemctl status NetworkManager
  12. 不重启系统让网卡生效的方法：
    nmcli connection up ens32
 ```
+### Centos8之 Cockpit监控
+```
+1. Cockpit Web系统监控
+   systemctl enable --now cockpit.socket
+   
+2. 开启cockpit服务：
+   systemctl start cockpit.service
+
+3. 查看cockpit状态
+   systemctl status cockpit.service
+
+4. web系统访问
+   https://192.168.2.1:9090
+```
