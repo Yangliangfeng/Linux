@@ -3,11 +3,18 @@
 * OpenResty基本语法
 ```
 1. pairs与ipairs的区别
+
    ipairs只能打印table有序序列（数组），pairs能打印table中的所有元素（哈希和数组）
    
 2. table.remove 删除指定元素
+
    table.remove只能删除table中的带下标的有序序列（数组）
+   
    删除哈希值只能用:table.first = nil,其中first是table其中的key
+   
+3. table.concat 拼接字符串
+   
+   只对table的有序序列有效
 ```
 * OpenResty第三方客户端
 ```
